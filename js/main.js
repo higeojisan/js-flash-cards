@@ -40,6 +40,17 @@
 
   setCard();
 
+  window.addEventListener('keyup', function(e){
+    // e.keyCode
+    // f: 70
+    // n: 78
+    if (e.keyCode === 70) {
+      flip();
+    } else if (e.keyCode === 78) {
+      next();
+    }
+  });
+
   function flip() {
     card.className = card.className === '' ? 'open' : '';
   }
