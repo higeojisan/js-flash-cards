@@ -1,59 +1,46 @@
 (function() {
   'use strict';
 
-  var cards = [
-    ['write', '書く'],
-    ['read', '読む'],
-    ['run', '走る'],
-    ['sleep', '寝る']
+  var words = [
+    {'en': 'read', 'ja': '読む'},
+    {'en': 'write', 'ja': '書く'},
+    {'en': 'eat', 'ja': '食べる'},
+    {'en': 'run', 'ja': '走る'},
+    {'en': 'walk', 'ja': '歩く'},
   ];
 
-  var count = 0;
-  var lastNum = cards.length - 1;
   var card = document.getElementById('card');
-  var nextBtn = document.getElementById('nextbtn');
-  var prevBtn = document.getElementById('prevbtn');
+  var btn = document.getElementById('btn');
+  var cardFront = document.getElementById('card-front');
+  var cardBack = document.getElementById('card-back');
 
-  // 初回読み込み時
-  window.onload = function() {
-    card.innerText = cards[0][0];
-    nextBtn.style.display = 'block';
-  };
-
-  // NEXTボタンを押したとき
-  nextBtn.addEventListener('click', function() {
-    count++;
-    if (count == 0) {
-      nextBtn.style.display = 'block';
-      prevBtn.style.display = 'none';
-    }
-    if (count < lastNum) {
-      nextBtn.style.display = 'block';
-      prevBtn.style.display = 'block';
-    }
-    if (count == lastNum) {
-      nextBtn.style.display = 'none';
-      prevBtn.style.display = 'block';
-    }
-    card.innerText = cards[count][0];
+  card.addEventListener('click', function(){
+    flip();
   });
 
-  // PREVボタンを押したとき
-  prevBtn.addEventListener('click', function() {
-    count--;
-    if (count == 0) {
-      nextBtn.style.display = 'block';
-      prevBtn.style.display = 'none';
-    }
-    if (count < lastNum) {
-      nextBtn.style.display = 'block';
-      prevBtn.style.display = 'block';
-    }
-    if (count == lastNum) {
-      nextBtn.style.display = 'none';
-      prevBtn.style.display = 'block';
-    }
-    card.innerText = cards[count][0];
+  btn.addEventListener('click', function(){
+    next();
   });
 
+  function next() {
+    if (card.className === 'open') {
+      card.addEventListener('transitionend', setCard);
+      flip();
+    } else {
+      setCard();
+    }
+  }
+
+  function setCard() {
+    var num = Math.floor(Math.random() * words.length);
+    cardFront.innerText = words[num]['en'];
+    cardBack.innerText = words[num]['ja'];
+    card.removeEventListener('transitionend', setCard);
+  }
+
+  setCard();
+
+  function flip() {
+    card.className = card.className === '' ? 'open' : '';
+  }
 })();
