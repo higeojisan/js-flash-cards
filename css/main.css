@@ -1,0 +1,30 @@
+body {
+  background: rgba(82, 75, 75, 0.20);
+}
+
+#card {
+  width: 500px;
+  height: 100px;
+  line-height: 100px;
+  margin: 100px auto 30px;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 5px;
+  font-size: 56px;
+  cursor: pointer;
+}
+
+#btn {
+  width: 200px;
+  height: 50px;
+  line-height: 50px;
+  margin: 0 auto;
+  text-align: center;
+  background: rgba(45, 208, 224, 0.85);
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 5px;
+  box-shadow: 0 3px rgba(45, 208, 224, 1.0);
+  cursor: pointer;
+}
